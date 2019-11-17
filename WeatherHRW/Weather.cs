@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -172,7 +172,7 @@ namespace WeatherHRW
             
         }
 
-        private void requestsListButton_Click(object sender, EventArgs e)
+        private async void requestsListButton_Click(object sender, EventArgs e)
         {
             using (SqlConnection conn = new SqlConnection())
             {
@@ -186,7 +186,7 @@ namespace WeatherHRW
                     conn.Open();
                     string sql = "SELECT * FROM Requests";
                     SqlCommand cmd = new SqlCommand(sql, conn);
-                    SqlDataReader dr = cmd.ExecuteReader();
+                    SqlDataReader dr = await cmd.ExecuteReaderAsync();
                     while (dr.Read())
                     {
                         jsonRichTextBox.Text += dr[1].ToString() + " " + dr[2].ToString() + " " + Environment.NewLine;
